@@ -1,8 +1,35 @@
-version: "3"
+version: '3'
 services:
+
   web:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: farisikhhaq/php-quiz2:latest
     container_name: web
     restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: web
+      SERVICE_TAGS: web
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - php-web
+  nginx-web:
+    image: nginx:alpine
+    container_name: nginx-web
+    restart: unless-stopped
+    tty: true
     ports:
-      - 8090:8090
+      - "8090:8090"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - php-web
+
+networks:
+  php-web:
+    driver: bridge
