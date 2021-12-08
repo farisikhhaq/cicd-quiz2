@@ -1,5 +1,5 @@
 
-name: cicd-quiz2
+name: cicd-quiz2-cc
 
 on:
   push:
