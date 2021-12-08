@@ -1,5 +1,5 @@
 
-name: cicd-demo
+name: cicd-quiz2
 
 on:
   push:
